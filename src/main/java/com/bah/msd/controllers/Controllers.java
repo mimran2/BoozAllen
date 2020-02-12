@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bah.msd.entities.Customer;
 import com.bah.msd.entities.Event;
+import com.bah.msd.entities.Registration;
 import com.bah.msd.persistence.CustomerRepository;
 import com.bah.msd.persistence.EventRepository;
+import com.bah.msd.persistence.RegistrationRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -29,6 +31,8 @@ public class Controllers {
 	private CustomerRepository CustomerRepository;
 	@Autowired
 	private EventRepository EventRepository;
+	@Autowired
+	private RegistrationRepository RegistrationRepository;
 
 	@PostMapping(path = "/register", consumes = JSON, produces = JSON)
 	@ResponseBody
@@ -69,10 +73,19 @@ public class Controllers {
 	@ResponseBody
 	public String deleteEvent(HttpServletResponse response, @PathVariable long id) {
 		response.setHeader("Location", "api/events");
-		response.setStatus(HttpServletResponse.SC_CREATED);
+		response.setStatus(HttpServletResponse.SC_OK);
 
 		EventRepository.delete(id);
 
 		return "event deletion success";
+	}
+	
+	@GetMapping(path = "/registrations", produces = JSON)
+	@ResponseBody
+	public Collection<Registration> getRegistrations(HttpServletResponse response) {
+		response.setHeader("Location", "api/registrations");
+		response.setStatus(HttpServletResponse.SC_OK);
+
+		return RegistrationRepository.findAll();
 	}
 }
