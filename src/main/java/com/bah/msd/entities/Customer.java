@@ -1,8 +1,20 @@
 package com.bah.msd.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
+@Table(name="CUSTOMERS")
 public class Customer {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private long id;
+	
+	@Column(name="CUSTOMER_NAME")
 	private String name;
 	private String email;
 	private String password;
