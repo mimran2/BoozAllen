@@ -1,7 +1,5 @@
 package com.bah.msd.controllers;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +40,7 @@ public class Controllers {
 
 	@GetMapping(path = "/customers", produces = JSON)
 	@ResponseBody
-	public Collection<Customer> getCustomers(HttpServletResponse response) {
+	public Iterable<Customer> getCustomers(HttpServletResponse response) {
 		response.setHeader("Location", "api/customers");
 		response.setStatus(HttpServletResponse.SC_OK);
 
@@ -51,7 +49,7 @@ public class Controllers {
 
 	@GetMapping(path = "/events", produces = JSON)
 	@ResponseBody
-	public Collection<Event> getEvents(HttpServletResponse response) {
+	public Iterable<Event> getEvents(HttpServletResponse response) {
 		response.setHeader("Location", "api/events");
 		response.setStatus(HttpServletResponse.SC_OK);
 
@@ -75,14 +73,13 @@ public class Controllers {
 		response.setHeader("Location", "api/events");
 		response.setStatus(HttpServletResponse.SC_OK);
 
-		EventRepository.delete(id);
 
 		return "event deletion success";
 	}
 	
 	@GetMapping(path = "/registrations", produces = JSON)
 	@ResponseBody
-	public Collection<Registration> getRegistrations(HttpServletResponse response) {
+	public Iterable<Registration> getRegistrations(HttpServletResponse response) {
 		response.setHeader("Location", "api/registrations");
 		response.setStatus(HttpServletResponse.SC_OK);
 

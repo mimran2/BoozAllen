@@ -1,5 +1,6 @@
 package com.bah.msd.entities;
 
+@Entity
 public class Customer {
 	private long id;
 	private String name;
