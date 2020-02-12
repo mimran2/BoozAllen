@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bah.msd.entities.Customer;
@@ -23,8 +25,15 @@ public class Controllers {
 	private CustomerRepository CustomerRepository;
 	@Autowired
 	private EventRepository EventRepository;
+	
+	@PostMapping(path = "/register", consumes = JSON,produces = JSON)
+	@ResponseBody
+	public String login() {
+		return "hi";
+	}
 
 	@GetMapping(path = "/customers", produces = JSON)
+	@ResponseBody
 	public Collection<Customer> getCustomers(HttpServletResponse response ) {
 		response.setHeader("Location", "api/customers");
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -33,6 +42,7 @@ public class Controllers {
 	}
 	
 	@GetMapping(path = "/events", produces = JSON)
+	@ResponseBody
 	public Collection<Event> getEvents(HttpServletResponse response ) {
 		response.setHeader("Location", "api/events");
 		response.setStatus(HttpServletResponse.SC_OK);
