@@ -14,6 +14,12 @@ public class Customer {
 	@Id
 	private long id;
 	
+	
+	
+	public Customer() {
+		super();
+	}
+
 	@Column(name="CUSTOMER_NAME")
 	private String name;
 	private String email;
