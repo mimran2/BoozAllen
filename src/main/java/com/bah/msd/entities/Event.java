@@ -6,10 +6,12 @@ public class Event {
 	private String title;
 	private String description;
 	
-	
+	 
+	public Event() {
+		super();
+	}
 	public Event(long id, String code, String title, String description) {
 		super();
-		this.id = id;
 		this.code = code;
 		this.title = title;
 		this.description = description;

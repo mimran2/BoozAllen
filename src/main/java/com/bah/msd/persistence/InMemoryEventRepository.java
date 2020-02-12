@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -20,5 +21,27 @@ public class InMemoryEventRepository implements EventRepository {
 		// TODO Auto-generated method stub
 		return eventList;
 	}
+	@Override
+	public Event findOne(long id) {
+		Optional<Event> eventOptional = eventList.stream().filter(
+				x -> x.getId() == id).findAny();
+		return eventOptional.orElse(null);
+	}
+	@Override
+	public Event save(Event event) {
+		Event foundEvent = findOne(event.getId());
+		if(foundEvent == null) {
+			eventList.add(event);
+			return event;
+		}else {
+			foundEvent.setId(event.getId());
+			foundEvent.setDescription(event.getDescription());
+			foundEvent.setTitle(event.getTitle());
+			foundEvent.setCode(event.getCode());
+		}
+		return foundEvent;
+	}
+	
+	
 
 }
