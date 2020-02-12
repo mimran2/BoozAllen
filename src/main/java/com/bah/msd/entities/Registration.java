@@ -22,7 +22,9 @@ public class Registration {
 	
 	private String notes;
 
-
+	//Default Constructor
+	public Registration() {}
+	
 	public Registration(long id, long customer_id, long event_id, Date registration_date, String notes) {
 		super();
 		this.id = id;
