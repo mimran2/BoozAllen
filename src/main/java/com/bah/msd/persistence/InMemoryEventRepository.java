@@ -41,6 +41,11 @@ public class InMemoryEventRepository implements EventRepository {
 		}
 		return foundEvent;
 	}
+	@Override
+	public void delete(long id) {
+		Event event = findOne(id);
+		eventList.remove(event);
+	}
 	
 	
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,9 +58,21 @@ public class Controllers {
 	@ResponseBody
 	public Event createUpdateEvent(HttpServletResponse response, @PathVariable long id, @RequestBody Event requestEvent) {
 		response.setHeader("Location", "api/events");
+		response.setStatus(HttpServletResponse.SC_CREATED);
 
 		Event event = EventRepository.save(requestEvent);
 
 		return event;
+	}
+	
+	@DeleteMapping(path = "/events/{id}", consumes = JSON, produces = JSON)
+	@ResponseBody
+	public String deleteEvent(HttpServletResponse response, @PathVariable long id) {
+		response.setHeader("Location", "api/events");
+		response.setStatus(HttpServletResponse.SC_CREATED);
+
+		EventRepository.delete(id);
+
+		return "event deletion success";
 	}
 }
