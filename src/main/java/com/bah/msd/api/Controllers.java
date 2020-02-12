@@ -1,4 +1,4 @@
-package com.bah.msd.controllers;
+package com.bah.msd.api;
 
 import javax.servlet.http.HttpServletResponse;
 
