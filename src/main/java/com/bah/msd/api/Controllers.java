@@ -38,15 +38,6 @@ public class Controllers {
 		return "hi";
 	}
 
-	@GetMapping(path = "/customers", produces = JSON)
-	@ResponseBody
-	public Iterable<Customer> getCustomers(HttpServletResponse response) {
-		response.setHeader("Location", "api/customers");
-		response.setStatus(HttpServletResponse.SC_OK);
-
-		return CustomerRepository.findAll();
-	}
-
 	@GetMapping(path = "/events", produces = JSON)
 	@ResponseBody
 	public Iterable<Event> getEvents(HttpServletResponse response) {
