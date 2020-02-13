@@ -28,6 +28,12 @@ public class CustomersAPI {
 		return CustomerRepository.findAll();
 	}
 
+	@GetMapping("/byname/{name}")
+	public Customer lookupCustomerByName(@PathVariable String name) { 
+		Customer response = CustomerRepository.findCustomerByName(name);
+		return response;
+	}
+	
 	@PostMapping("/byname")
 	public Customer lookupCustomerByName(@RequestBody Customer customer) {
 		Customer response = CustomerRepository.findCustomerByName(customer.getName());
