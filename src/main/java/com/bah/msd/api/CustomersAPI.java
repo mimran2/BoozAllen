@@ -19,24 +19,20 @@ import com.bah.msd.persistence.CustomerRepository;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomersAPI {
+	
 	@Autowired
 	private CustomerRepository CustomerRepository;
 
 	@GetMapping
-	public Iterable<Customer> getCustomers(HttpServletResponse response) {
-		response.setHeader("Location", "api/customers");
-		response.setStatus(HttpServletResponse.SC_OK);
-
+	public Iterable<Customer> getCustomers() { 
 		return CustomerRepository.findAll();
 	}
 
 	@PostMapping("/byname")
-	public Customer lookupCustomerByName(HttpServletResponse response, @RequestBody String name) {
-		response.setHeader("Location", "api/events");
-		response.setStatus(HttpServletResponse.SC_FOUND);
-		Customer customer = CustomerRepository.findByName(name).orElse(null);
+	public Customer lookupCustomerByName(@RequestBody Customer customer) {
+		Customer response = CustomerRepository.findCustomerByName(customer.getName());
 
-		return customer;
+		return response;
 	}
 
 	@PutMapping("/{id}")

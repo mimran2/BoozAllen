@@ -22,6 +22,7 @@ public class Customer {
 
 	@Column(name="CUSTOMER_NAME")
 	private String name;
+	
 	private String email;
 	private String password;
 
