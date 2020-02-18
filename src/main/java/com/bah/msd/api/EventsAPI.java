@@ -7,12 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bah.msd.entities.Customer;
 import com.bah.msd.entities.Event;
 import com.bah.msd.persistence.EventRepository;
 
@@ -28,6 +30,16 @@ public class EventsAPI {
 	@GetMapping(path = "/events", produces = JSON)
 	public Iterable<Event> getAll(HttpServletResponse response) {
 		return EventRepository.findAll();
+	}
+	
+	@PostMapping("/events")
+	public ResponseEntity<?> postEvent(@RequestBody Event event) {
+		if (event.getCode() == null || event.getTitle() == null || event.getDescription() == null) {
+			return ResponseEntity.badRequest().build();
+		}
+		EventRepository.save(event);
+
+		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping(path = "/events/{id}")

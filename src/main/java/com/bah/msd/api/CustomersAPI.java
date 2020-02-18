@@ -17,41 +17,42 @@ import com.bah.msd.persistence.CustomerRepository;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomersAPI {
-	
+
 	@Autowired
 	private CustomerRepository CustomerRepository;
 
 	@GetMapping
-	public Iterable<Customer> getCustomers() { 
+	public Iterable<Customer> getCustomers() {
 		return CustomerRepository.findAll();
 	}
 
 	@GetMapping("/byname/{name}")
-	public Customer lookupCustomerByName(@PathVariable String name) { 
+	public Customer lookupCustomerByName(@PathVariable String name) {
 		Customer response = CustomerRepository.findCustomerByName(name);
 		return response;
 	}
-	
+
 	@PostMapping("/byname")
 	public Customer lookupCustomerByName(@RequestBody Customer customer) {
 		Customer response = CustomerRepository.findCustomerByName(customer.getName());
 
 		return response;
 	}
-	
+
 	@PostMapping()
 	public ResponseEntity<?> postCustomer(@RequestBody Customer customer) {
 		if (customer.getName() == null || customer.getEmail() == null || customer.getPassword() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		CustomerRepository.save(customer);
-		
+
 		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> putCustomer(@RequestBody Customer customer, @PathVariable long id) {
-		if (customer.getId() != id || customer.getName() == null || customer.getEmail() == null) {
+		if (customer.getId() != id || customer.getName() == null || customer.getEmail() == null
+				|| customer.getPassword() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		CustomerRepository.save(customer);
