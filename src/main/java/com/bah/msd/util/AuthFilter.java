@@ -17,7 +17,7 @@ public class AuthFilter implements Filter {
 
 	JWTHelper jwtUtil = new JWTHelper();
 	
-	private String api_scope = "com.api.customer.r";
+	private String api_scope = "com.webage.auth.apis";
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
