@@ -1,7 +1,5 @@
 package com.bah.msd.api;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,6 +37,16 @@ public class CustomersAPI {
 		Customer response = CustomerRepository.findCustomerByName(customer.getName());
 
 		return response;
+	}
+	
+	@PostMapping()
+	public ResponseEntity<?> postCustomer(@RequestBody Customer customer) {
+		if (customer.getName() == null || customer.getEmail() == null || customer.getPassword() == null) {
+			return ResponseEntity.badRequest().build();
+		}
+		CustomerRepository.save(customer);
+		
+		return ResponseEntity.ok().build();
 	}
 
 	@PutMapping("/{id}")
