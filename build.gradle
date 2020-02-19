@@ -4,12 +4,13 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven'
 apply plugin: 'application'
 
+
 group = 'com.bah.msd'
 version = '0.0.1-SNAPSHOT'
 
 description = "Project-Data-APIs"
 
-mainClassName = "com.bah.msd.BoozAllenApplication"
+mainClassName = "com.bah.msd.MetroCenterDataServiceApplication"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
